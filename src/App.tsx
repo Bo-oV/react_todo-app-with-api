@@ -6,21 +6,7 @@ import { Notification } from './components/Notification';
 import { UserWarning } from './UserWarning';
 import { getTodos, USER_ID } from './api/todos';
 import { Todo } from './types/Todo';
-import { client } from './utils/fetchClient';
-
-export enum Filter {
-  All = 'all',
-  Active = 'active',
-  Completed = 'completed',
-}
-
-export enum TodoError {
-  Load = 'Unable to load todos',
-  Add = 'Unable to add a todo',
-  Delete = 'Unable to delete a todo',
-  Update = 'Unable to update a todo',
-  EmptyTitle = 'Title should not be empty',
-}
+import { client, Filter, TodoError } from './utils/fetchClient';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -79,7 +65,7 @@ export const App: React.FC = () => {
 
   const visibleTodos = useMemo(() => {
     return todos.filter(todo => {
-      if (filter === 'all') {
+      if (filter === Filter.All) {
         return true;
       }
 

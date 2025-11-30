@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Todo } from '../types/Todo';
 
-
 const NewTodoForm: React.FC<{
   onAdd: (title: string) => Promise<boolean>;
   disabled?: boolean;

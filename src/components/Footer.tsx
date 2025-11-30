@@ -1,4 +1,4 @@
-import { Filter } from '../App';
+import { Filter } from '../utils/fetchClient';
 
 export const Footer: React.FC<{
   activeCount: number;

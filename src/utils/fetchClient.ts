@@ -44,3 +44,17 @@ export const client = {
   patch: <T>(url: string, data: any) => request<T>(url, 'PATCH', data),
   delete: (url: string) => request(url, 'DELETE'),
 };
+
+export enum Filter {
+  All = 'all',
+  Active = 'active',
+  Completed = 'completed',
+}
+
+export enum TodoError {
+  Load = 'Unable to load todos',
+  Add = 'Unable to add a todo',
+  Delete = 'Unable to delete a todo',
+  Update = 'Unable to update a todo',
+  EmptyTitle = 'Title should not be empty',
+}
