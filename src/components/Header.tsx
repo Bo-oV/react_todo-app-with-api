@@ -67,6 +67,7 @@ const NewTodoForm: React.FC<{
         value={value}
         onChange={e => setValue(e.target.value)}
         disabled={disabled}
+        onBlur={() => submit()}
       />
     </form>
   );

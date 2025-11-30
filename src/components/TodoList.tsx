@@ -94,6 +94,19 @@ export const TodoItem: React.FC<{
     setValue(todo.title);
   };
 
+  const handleTitleDoubleClick = () => {
+    if (!isBusy) {
+      setEditing(true);
+    }
+  };
+
+  const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (e.key === 'Enter' && !isBusy) {
+      setEditing(true);
+      e.currentTarget.blur();
+    }
+  };
+
   return (
     <div data-cy="Todo" className={`todo ${todo.completed ? 'completed' : ''}`}>
       <label htmlFor={`todo-${todo.id}`} className="todo__status-label">
@@ -116,17 +129,8 @@ export const TodoItem: React.FC<{
             className="todo__title"
             role="button"
             tabIndex={0}
-            onDoubleClick={() => {
-              if (!isBusy) {
-                setEditing(true);
-              }
-            }}
-            onKeyDown={e => {
-              if (e.key === 'Enter' && !isBusy) {
-                setEditing(true);
-                e.currentTarget.blur();
-              }
-            }}
+            onDoubleClick={handleTitleDoubleClick}
+            onKeyDown={handleTitleKeyDown}
           >
             {todo.title}
           </div>
