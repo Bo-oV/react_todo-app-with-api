@@ -129,6 +129,7 @@ export const App: React.FC = () => {
       setTodos(prev => [...prev, created]);
 
       setTempTodo(null);
+      setFocusTrigger(n => n + 1);
 
       return true;
     } catch (e) {

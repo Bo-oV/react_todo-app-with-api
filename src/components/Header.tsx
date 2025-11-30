@@ -1,29 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Todo } from '../types/Todo';
 
-const safeFocusInput = (inputRef: React.RefObject<HTMLInputElement | null>) => {
-  requestAnimationFrame(() => {
-    const el = inputRef.current;
-
-    if (!el) {
-      return;
-    }
-
-    const editingFocused = document.querySelector<HTMLInputElement>(
-      '[data-cy="TodoTitleField"]:focus',
-    );
-
-    if (editingFocused) {
-      return;
-    }
-
-    if (document.activeElement === el || el.disabled) {
-      return;
-    }
-
-    el.focus();
-  });
-};
 
 const NewTodoForm: React.FC<{
   onAdd: (title: string) => Promise<boolean>;
@@ -35,15 +12,9 @@ const NewTodoForm: React.FC<{
 
   useEffect(() => {
     if (!disabled) {
-      safeFocusInput(inputRef);
+      inputRef.current?.focus();
     }
-  }, [disabled]);
-
-  useEffect(() => {
-    if (!disabled) {
-      setTimeout(() => safeFocusInput(inputRef), 0);
-    }
-  }, [focusTrigger, disabled]);
+  }, [disabled, focusTrigger]);
 
   const submit = async (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -52,8 +23,6 @@ const NewTodoForm: React.FC<{
     if (success) {
       setValue('');
     }
-
-    setTimeout(() => safeFocusInput(inputRef), 0);
   };
 
   return (
@@ -67,7 +36,6 @@ const NewTodoForm: React.FC<{
         value={value}
         onChange={e => setValue(e.target.value)}
         disabled={disabled}
-        onBlur={() => submit()}
       />
     </form>
   );

@@ -26,12 +26,7 @@ export const TodoItem: React.FC<{
   useEffect(() => {
     if (editing) {
       setValue(todo.title);
-      requestAnimationFrame(() => inputRef.current?.focus());
-      const t = setTimeout(() => {
-        inputRef.current?.focus();
-      }, 50);
-
-      return () => clearTimeout(t);
+      inputRef.current?.focus();
     }
   }, [editing, todo.title]);
 
